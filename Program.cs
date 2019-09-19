@@ -10,7 +10,7 @@ namespace Calculator
 {
     public class Program
     {
-        public static string path = @"E:\Chen-jor.txt";//结果输入到E:\Chen-jor中
+       
         static void Main(string[] args)
         {
             int n;
@@ -20,7 +20,7 @@ namespace Calculator
         }
         static public void GetSubject(int n)
         {
-            StreamWriter sw = new StreamWriter(path);
+            
             Random rdm = new Random();
             int[] num = new int[4];
             char[] ch = new char[3];
@@ -28,14 +28,14 @@ namespace Calculator
             {
                 int cnum = rdm.Next(2, 4);       //运算符个数
                 num[cnum] = rdm.Next(0,101);     //生成随机数
-                double resultTest = num[0];     //用于检查结果是否为整数
+                double rt = num[0];     //用于检查结果是否为整数
                 long result = num[0];
                 string subject = num[0].ToString();  //代表算式的字符串
                 for (int m = 0; m < cnum; m++)
                 {
-                    num[m] = rdm.Next(101);
-                    int r = rdm.Next(4);
-                    switch (r)
+                    num[m] = rdm.Next(0,101);
+                    int t = rdm.Next(0,4);
+                    switch (t)
                     {
                         case 0:
                             ch[m] = '+'; break;
@@ -56,18 +56,18 @@ namespace Calculator
                     switch (ch[m])
                     {
                         case '+':
-                            resultTest = resultTest + (double)num[m]; break;
+                            rt = rt + (double)num[m]; break;
                         case '-':
-                            resultTest = resultTest - (double)num[m]; break;
+                            rt = rt - (double)num[m]; break;
                         case '*':
-                            resultTest = resultTest * (double)num[m]; break;
+                            rt = rt * (double)num[m]; break;
                         case '/':
-                            resultTest = resultTest / (double)num[m]; break;
+                            rt = rt / (double)num[m]; break;
                         default:
                             break;
                     }
-                    //检验resulttest是否为整数，若不是，重新循环。
-                    if (resultTest != Convert.ToDouble(Convert.ToInt64(resultTest)))
+                    //检验rt是否为整数，若不是，重新循环。
+                    if (rt != Convert.ToDouble(Convert.ToInt64(rt)))
                     {
                         m--;
                         continue;
@@ -88,10 +88,10 @@ namespace Calculator
                     subject += ch[m] + num[m].ToString();
                 }
                 subject += "=" + result.ToString();
-                sw.WriteLine(subject);
+                Console.WriteLine(subject);
             }
-            sw.Close();
-            Console.WriteLine("已将算式写入:" + path);
+            
+         
             Console.ReadLine();
         }
     }
